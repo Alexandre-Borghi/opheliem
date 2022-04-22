@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ophélie M.</title>
+
+    <style>
+        #memory {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: auto auto;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            gap: 10px;
+        }
+
+        #memory>img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="memory">
+        <img nb="0" src="http://www.clipartbest.com/cliparts/yik/4bp/yik4bpBiE.png" val="0">
+        <img nb="1" src="http://www.clipartbest.com/cliparts/yik/4bp/yik4bpBiE.png" val="0">
+        <img nb="2" src="http://www.clipartbest.com/cliparts/yik/4bp/yik4bpBiE.png" val="1">
+        <img nb="3" src="http://www.clipartbest.com/cliparts/yik/4bp/yik4bpBiE.png" val="2">
+        <img nb="4" src="http://www.clipartbest.com/cliparts/yik/4bp/yik4bpBiE.png" val="2">
+        <img nb="5" src="http://www.clipartbest.com/cliparts/yik/4bp/yik4bpBiE.png" val="1">
+    </div>
+
+    <script>
+        const div = document.querySelector("div#memory");
+        const cards = document.querySelectorAll("div#memory>img");
+        const images = [
+            "https://www.coloori.com/wp-content/uploads/2016/01/carotte.jpg",
+            "https://thierrymiauton.ch/wp-content/uploads/2020/04/Poireau.jpg",
+            "https://thumbs.dreamstime.com/b/fraise-vecteur-32917572.jpg",
+        ]
+        const hiddenImage = "http://www.clipartbest.com/cliparts/yik/4bp/yik4bpBiE.png";
+        const game = {
+            returnedCards: 0,
+            returnedCard1: null,
+            returnedCard2: null,
+            frozenCards: [],
+
+        }
+        console.log(cards);
+
+        function resetCurrentCards() {
+            game.returnedCards = 0;
+            game.returnedCard1.src = hiddenImage;
+            game.returnedCard2.src = hiddenImage;
+            game.returnedCard1 = null;
+            game.returnedCard2 = null;
+        }
+
+        function bravo() {
+            div.innerHTML = "<h1>BRAVO<h1>"
+        }
+
+        cards.forEach(card => {
+            card.addEventListener("click", _ => {
+                const nb = card.getAttribute("nb");
+                const val = card.getAttribute("val");
+
+                if (game.frozenCards.includes(nb)) {
+                    return;
+                }
+
+                switch (game.returnedCards) {
+                    case 0:
+                        card.src = images[val];
+                        game.returnedCards = 1;
+                        game.returnedCard1 = card;
+                        break;
+
+                    case 1:
+                        const otherNb = game.returnedCard1.getAttribute("nb");
+                        const otherVal = game.returnedCard1.getAttribute("val");
+
+                        if (otherNb == nb) {
+                            return;
+                        }
+
+                        card.src = images[val];
+                        game.returnedCards = 2;
+                        game.returnedCard2 = card;
+                        if (otherVal != val) {
+                            window.setTimeout(resetCurrentCards, 700);
+                        } else {
+                            game.frozenCards.push(nb, otherNb);
+                            game.returnedCard1 = null;
+                            game.returnedCard2 = null;
+                            game.returnedCards = 0;
+
+                            if (game.frozenCards.length == 6) {
+                                window.setTimeout(bravo, 700);
+                            }
+                        }
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
