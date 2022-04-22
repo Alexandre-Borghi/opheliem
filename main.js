@@ -33,7 +33,7 @@ function initGame() {
         "https://thierrymiauton.ch/wp-content/uploads/2020/04/Poireau.jpg",
         "https://thumbs.dreamstime.com/b/fraise-vecteur-32917572.jpg",
     ]
-    const hiddenImage = "http://www.clipartbest.com/cliparts/yik/4bp/yik4bpBiE.png";
+    const hiddenImage = "./img/hidden.png";
     const game = {
         returnedCards: 0,
         returnedCard1: null,
