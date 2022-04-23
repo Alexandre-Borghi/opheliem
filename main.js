@@ -28,9 +28,9 @@ function transition(startPageId, endPageId) {
 function initGame() {
     const cards = document.querySelectorAll("div#memory>img");
     const images = [
-        "https://www.coloori.com/wp-content/uploads/2016/01/carotte.jpg",
-        "https://thierrymiauton.ch/wp-content/uploads/2020/04/Poireau.jpg",
-        "https://thumbs.dreamstime.com/b/fraise-vecteur-32917572.jpg",
+        "./img/produit-1.jpg",
+        "./img/produit-2.jpg",
+        "./img/produit-3.jpg",
     ];
     const hiddenImage = "./img/hidden.png";
     const game = {
