@@ -26,20 +26,18 @@ function transition(startPageId, endPageId) {
 }
 
 function initGame() {
-    const div = document.querySelector("div#memory");
     const cards = document.querySelectorAll("div#memory>img");
     const images = [
         "https://www.coloori.com/wp-content/uploads/2016/01/carotte.jpg",
         "https://thierrymiauton.ch/wp-content/uploads/2020/04/Poireau.jpg",
         "https://thumbs.dreamstime.com/b/fraise-vecteur-32917572.jpg",
-    ]
+    ];
     const hiddenImage = "./img/hidden.png";
     const game = {
         returnedCards: 0,
         returnedCard1: null,
         returnedCard2: null,
         frozenCards: [],
-
     }
 
     function resetCurrentCards() {
@@ -51,7 +49,7 @@ function initGame() {
     }
 
     function bravo() {
-        div.innerHTML = "<h1>BRAVO<h1>"
+        transition("page-2", "page-3");
     }
 
     cards.forEach(card => {
