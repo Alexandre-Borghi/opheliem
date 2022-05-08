@@ -19,9 +19,12 @@ function transition(startPageId, endPageId) {
         throw Error(`Couldn't find end page #${endPageId}`);
     }
 
+    endPageEl.style.display = "flex";
+
     startPageEl.classList.add("hidden");
     window.setTimeout(() => {
         endPageEl.classList.remove("hidden");
+        startPageEl.style.display = "none";
     }, 1000);
 }
 
